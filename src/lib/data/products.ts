@@ -67,8 +67,8 @@ export const listProducts = async ({
           ...queryParams,
         },
         headers,
-        next,
-        cache: "force-cache",
+        next: { tags: ["products"] },
+        cache: "no-store",
       }
     )
     .then(({ products, count }) => {

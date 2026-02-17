@@ -4,9 +4,10 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 
 type ProductInfoProps = {
   product: HttpTypes.StoreProduct
+  sanityData?: any
 }
 
-const ProductInfo = ({ product }: ProductInfoProps) => {
+const ProductInfo = ({ product, sanityData }: ProductInfoProps) => {
   return (
     <div id="product-info">
       <div className="flex flex-col gap-y-4 lg:max-w-[500px] mx-auto">
@@ -23,14 +24,20 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           className="text-3xl leading-10 text-ui-fg-base"
           data-testid="product-title"
         >
-          {product.title}
+          {sanityData?.title || product.title}
         </Heading>
+
+        {sanityData?.subtitle && (
+          <Text className="text-large text-ui-fg-subtle italic">
+            {sanityData.subtitle}
+          </Text>
+        )}
 
         <Text
           className="text-medium text-ui-fg-subtle whitespace-pre-line"
           data-testid="product-description"
         >
-          {product.description}
+          {sanityData?.description || product.description}
         </Text>
       </div>
     </div>

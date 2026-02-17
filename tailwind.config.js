@@ -34,6 +34,14 @@ module.exports = {
           80: "#1F2937",
           90: "#111827",
         },
+        m3: {
+          oat: "#FDF8F5",
+          clay: "#F5E9E2",
+          coffee: "#2C1810",
+          terracotta: "#8D4E3F",
+          sand: "#D9B382",
+          surface: "#EBE0D8",
+        },
       },
       borderRadius: {
         none: "0px",
@@ -60,6 +68,7 @@ module.exports = {
       },
       fontFamily: {
         sans: [
+          "var(--font-instrument-sans)",
           "Inter",
           "-apple-system",
           "BlinkMacSystemFont",
@@ -68,6 +77,10 @@ module.exports = {
           "Helvetica Neue",
           "Ubuntu",
           "sans-serif",
+        ],
+        serif: [
+          "var(--font-playfair-display)",
+          "serif",
         ],
       },
       keyframes: {
