@@ -39,9 +39,37 @@ const ProductInfo = ({ product, sanityData }: ProductInfoProps) => {
         >
           {sanityData?.description || product.description}
         </Text>
+
+        {sanityData?.features && sanityData.features.length > 0 && (
+          <div className="mt-8 border-t border-gray-100 pt-6">
+            <Text className="font-semibold mb-4 text-small-regular text-ui-fg-base">Key Features</Text>
+            <ul className="list-disc list-outside pl-5 space-y-2">
+              {sanityData.features.map((feature: string, index: number) => (
+                <li key={index} className="text-medium text-ui-fg-subtle">
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {sanityData?.specifications && sanityData.specifications.length > 0 && (
+          <div className="mt-8 border-t border-gray-100 pt-6">
+            <Text className="font-semibold mb-4 text-small-regular text-ui-fg-base">Specifications</Text>
+            <div className="grid grid-cols-1 gap-y-3">
+              {sanityData.specifications.map((spec: any, index: number) => (
+                <div key={index} className="flex justify-between text-medium border-b border-dashed border-gray-100 pb-2 last:border-0 text-ui-fg-subtle">
+                  <span className="font-medium text-ui-fg-base">{spec.label}</span>
+                  <span>{spec.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   )
 }
 
 export default ProductInfo
+  ```

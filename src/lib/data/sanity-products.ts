@@ -1,7 +1,7 @@
 import { sanityClient } from "../sanity"
 
 export async function getSanityProductByHandle(handle: string) {
-    const query = `*[_type == "product" && handle.current == $handle][0]{
+  const query = `*[_type == "product" && handle.current == $handle][0]{
     _id,
     title,
     subtitle,
@@ -14,22 +14,25 @@ export async function getSanityProductByHandle(handle: string) {
       }
     },
     material,
+    features,
+    specifications,
+    downloads,
     collection->{
       title
     }
   }`
 
-    try {
-        const product = await sanityClient.fetch(query, { handle })
-        return product
-    } catch (error) {
-        console.warn("Error fetching Sanity product:", error)
-        return null
-    }
+  try {
+    const product = await sanityClient.fetch(query, { handle })
+    return product
+  } catch (error) {
+    console.warn("Error fetching Sanity product:", error)
+    return null
+  }
 }
 
 export async function getSanityProductByMedusaId(medusaId: string) {
-    const query = `*[_type == "product" && medusaId == $medusaId][0]{
+  const query = `*[_type == "product" && medusaId == $medusaId][0]{
     _id,
     title,
     subtitle,
@@ -42,16 +45,19 @@ export async function getSanityProductByMedusaId(medusaId: string) {
       }
     },
     material,
+    features,
+    specifications,
+    downloads,
     collection->{
       title
     }
   }`
 
-    try {
-        const product = await sanityClient.fetch(query, { medusaId })
-        return product
-    } catch (error) {
-        console.warn("Error fetching Sanity product:", error)
-        return null
-    }
+  try {
+    const product = await sanityClient.fetch(query, { medusaId })
+    return product
+  } catch (error) {
+    console.warn("Error fetching Sanity product:", error)
+    return null
+  }
 }

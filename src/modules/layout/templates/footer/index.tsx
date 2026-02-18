@@ -1,155 +1,66 @@
-import { listCategories } from "@lib/data/categories"
-import { listCollections } from "@lib/data/collections"
-import { Text, clx } from "@medusajs/ui"
 
+import { Text, clx } from "@medusajs/ui"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import MedusaCTA from "@modules/layout/components/medusa-cta"
+import { Instagram, Twitter, Facebook } from "lucide-react"
 
 export default async function Footer() {
-  const { collections } = await listCollections({
-    fields: "*products",
-  })
-  const productCategories = await listCategories()
-
   return (
-    <footer className="border-t border-ui-border-base w-full">
-      <div className="content-container flex flex-col w-full">
-        <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between py-40">
-          <div>
+    <footer className="border-t border-[#F5E9E2] w-full bg-[#fcf9f6]">
+      <div className="content-container flex flex-col w-full py-20">
+        <div className="flex flex-col md:flex-row justify-between w-full h-full gap-12">
+
+          {/* Brand & Studio Info */}
+          <div className="flex flex-col gap-6 md:w-1/3">
             <LocalizedClientLink
               href="/"
-              className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
+              className="text-2xl font-bold tracking-tight luxury-serif text-[#2C1810] hover:text-[#8D4E3F] transition-colors"
             >
-              Medusa Store
+              ARCH & GRAIN
             </LocalizedClientLink>
-          </div>
-          <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3">
-            {productCategories && productCategories?.length > 0 && (
-              <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Categories
-                </span>
-                <ul
-                  className="grid grid-cols-1 gap-2"
-                  data-testid="footer-categories"
-                >
-                  {productCategories?.slice(0, 6).map((c) => {
-                    if (c.parent_category) {
-                      return
-                    }
-
-                    const children =
-                      c.category_children?.map((child) => ({
-                        name: child.name,
-                        handle: child.handle,
-                        id: child.id,
-                      })) || null
-
-                    return (
-                      <li
-                        className="flex flex-col gap-2 text-ui-fg-subtle txt-small"
-                        key={c.id}
-                      >
-                        <LocalizedClientLink
-                          className={clx(
-                            "hover:text-ui-fg-base",
-                            children && "txt-small-plus"
-                          )}
-                          href={`/categories/${c.handle}`}
-                          data-testid="category-link"
-                        >
-                          {c.name}
-                        </LocalizedClientLink>
-                        {children && (
-                          <ul className="grid grid-cols-1 ml-3 gap-2">
-                            {children &&
-                              children.map((child) => (
-                                <li key={child.id}>
-                                  <LocalizedClientLink
-                                    className="hover:text-ui-fg-base"
-                                    href={`/categories/${child.handle}`}
-                                    data-testid="category-link"
-                                  >
-                                    {child.name}
-                                  </LocalizedClientLink>
-                                </li>
-                              ))}
-                          </ul>
-                        )}
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-            )}
-            {collections && collections.length > 0 && (
-              <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Collections
-                </span>
-                <ul
-                  className={clx(
-                    "grid grid-cols-1 gap-2 text-ui-fg-subtle txt-small",
-                    {
-                      "grid-cols-2": (collections?.length || 0) > 3,
-                    }
-                  )}
-                >
-                  {collections?.slice(0, 6).map((c) => (
-                    <li key={c.id}>
-                      <LocalizedClientLink
-                        className="hover:text-ui-fg-base"
-                        href={`/collections/${c.handle}`}
-                      >
-                        {c.title}
-                      </LocalizedClientLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <div className="flex flex-col gap-y-2">
-              <span className="txt-small-plus txt-ui-fg-base">Medusa</span>
-              <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle txt-small">
-                <li>
-                  <a
-                    href="https://github.com/medusajs"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://docs.medusajs.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    Documentation
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/medusajs/nextjs-starter-medusa"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    Source code
-                  </a>
-                </li>
-              </ul>
+            <div className="flex flex-col gap-2 text-sm text-[#2C1810]/60 leading-relaxed font-light italic">
+              <p>124 Grain St, Pacific Northwest</p>
+              <p>studio@archandgrain.co</p>
             </div>
           </div>
+
+          {/* Navigation Links */}
+          <div className="flex gap-10 md:gap-20 text-[11px] font-bold tracking-[0.2em] uppercase text-[#2C1810] md:w-2/3 md:justify-end">
+            <div className="flex flex-col gap-4">
+              <span className="text-[#8D4E3F] mb-2">Explore</span>
+              <LocalizedClientLink href="/store" className="hover:text-[#8D4E3F] transition-colors">Collection</LocalizedClientLink>
+              <LocalizedClientLink href="/process" className="hover:text-[#8D4E3F] transition-colors">Our Process</LocalizedClientLink>
+              <LocalizedClientLink href="/about" className="hover:text-[#8D4E3F] transition-colors">The Studio</LocalizedClientLink>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <span className="text-[#8D4E3F] mb-2">Service</span>
+              <LocalizedClientLink href="/contact" className="hover:text-[#8D4E3F] transition-colors">Contact</LocalizedClientLink>
+              <LocalizedClientLink href="/faq" className="hover:text-[#8D4E3F] transition-colors">FAQ</LocalizedClientLink>
+              <LocalizedClientLink href="/shipping" className="hover:text-[#8D4E3F] transition-colors">Shipping</LocalizedClientLink>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <span className="text-[#8D4E3F] mb-2">Social</span>
+              <a href="https://instagram.com" target="_blank" className="hover:text-[#8D4E3F] transition-colors flex items-center gap-2">
+                Instagram
+              </a>
+              <a href="https://pinterest.com" target="_blank" className="hover:text-[#8D4E3F] transition-colors flex items-center gap-2">
+                Pinterest
+              </a>
+            </div>
+          </div>
+
         </div>
-        <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
-          <Text className="txt-compact-small">
-            © {new Date().getFullYear()} Medusa Store. All rights reserved.
+
+        <div className="flex w-full mt-20 justify-between items-end border-t border-[#2C1810]/5 pt-8">
+          <Text className="text-[10px] uppercase font-bold tracking-widest text-[#2C1810]/40">
+            © {new Date().getFullYear()} Arch & Grain. All rights reserved.
           </Text>
-          <MedusaCTA />
+          <div className="flex gap-4 text-[#2C1810]/40">
+            <Instagram size={18} className="hover:text-[#8D4E3F] cursor-pointer" />
+            <Twitter size={18} className="hover:text-[#8D4E3F] cursor-pointer" />
+            <Facebook size={18} className="hover:text-[#8D4E3F] cursor-pointer" />
+          </div>
         </div>
       </div>
     </footer>
