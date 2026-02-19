@@ -97,7 +97,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   }
 }
 
-import { getSanityProductByHandle } from "@lib/data/sanity-products"
+
 
 export default async function ProductPage(props: Props) {
   const params = await props.params
@@ -119,9 +119,6 @@ export default async function ProductPage(props: Props) {
     notFound()
   }
 
-  // Fetch Sanity data
-  const sanityProduct = await getSanityProductByHandle(params.handle)
-
   const images = getImagesForVariant(pricedProduct, selectedVariantId)
 
   return (
@@ -130,7 +127,7 @@ export default async function ProductPage(props: Props) {
       region={region}
       countryCode={params.countryCode}
       images={images}
-      sanityData={sanityProduct}
+      sanityData={undefined}
     />
   )
 }

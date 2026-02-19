@@ -72,4 +72,3 @@ const ProductInfo = ({ product, sanityData }: ProductInfoProps) => {
 }
 
 export default ProductInfo
-  ```
